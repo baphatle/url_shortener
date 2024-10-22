@@ -7,7 +7,7 @@ export const shortenUrl = async (req, res) => {
     try {
         const shortCode = nanoid(8);
 
-        const shortUrl = `localhost:6061/api/${shortCode}`;
+        const shortUrl = `localhost:6061/${shortCode}`;
 
         // Lưu thông tin vào database
         const url = new Url({
