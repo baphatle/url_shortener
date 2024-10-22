@@ -85,7 +85,8 @@ export const editShortUrl = async (req, res) => {
 
 export const editExpiration = async (req, res) => {
     const { shortCode } = req.params;
-    const { days } = req.body; // Nhận số ngày từ client
+    const { days } = req.body;
+    console.log(typeof (days))
 
     try {
         const url = await Url.findOne({ shortCode });
@@ -94,11 +95,9 @@ export const editExpiration = async (req, res) => {
             return res.status(404).json({ message: 'Không tìm thấy URL rút gọn' });
         }
 
-        // Tính toán ngày hết hạn mới
         const newExpiresAt = new Date();
-        newExpiresAt.setDate(newExpiresAt.getDate() + days); // Thêm số ngày vào ngày hiện tại
+        newExpiresAt.setDate(newExpiresAt.getDate() + parseInt(days));
 
-        // Cập nhật thời gian hết hạn
         url.expiresAt = newExpiresAt;
 
         await url.save();

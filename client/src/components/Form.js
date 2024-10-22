@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import "../css/Form.css"
 
-
 export default function Form() {
-
     const [originalUrl, setOriginalUrl] = useState('');
     const [shortUrl, setShortUrl] = useState('');
-    const [copySuccess, setCopySuccess] = useState('');
+    const [customShortUrl, setCustomShortUrl] = useState('');
+    const [expirationDays, setExpirationDays] = useState('');
+    // const [copySuccess, setCopySuccess] = useState('');
 
     const handleShorten = async () => {
         try {
@@ -18,9 +18,33 @@ export default function Form() {
         }
     };
 
+    const handleCustomShortUrl = async () => {
+        try {
+            const response = await axios.put(`/edit/${shortUrl.split('/').pop()}`, {
+                newShortCode: customShortUrl
+            });
+            setShortUrl(response.data.shortUrl);
+            setCustomShortUrl(''); // Clear the custom short URL input
+        } catch (error) {
+            console.error('Error updating short URL', error);
+        }
+    };
+
+    const handleSetExpiration = async () => {
+        try {
+            const response = await axios.put(`/expiration/${shortUrl.split('/').pop()}`, {
+                days: expirationDays
+            });
+            console.log('Expiration updated', response.data);
+            setExpirationDays(''); // Clear the expiration days input
+        } catch (error) {
+            console.error('Error setting expiration date', error);
+        }
+    };
+
     const handleCopy = () => {
         navigator.clipboard.writeText(shortUrl).then(() => {
-            setCopySuccess('Copied!');
+            alert('Copied!'); // Show alert when copy is successful
         }, (err) => {
             console.error('Failed to copy: ', err);
         });
@@ -43,9 +67,31 @@ export default function Form() {
                 <div className="result-container">
                     <input type="text" value={shortUrl} readOnly />
                     <button onClick={handleCopy}>Copy</button>
-                    {copySuccess && <p>{copySuccess}</p>}
+                    {/* {copySuccess && <p>{copySuccess}</p>} */}
+
+                    {/* Custom Short URL */}
+                    <div className="custom-container">
+                        <input
+                            type="text"
+                            placeholder="Custom short URL"
+                            value={customShortUrl}
+                            onChange={(e) => setCustomShortUrl(e.target.value)}
+                        />
+                        <button onClick={handleCustomShortUrl}>Update</button>
+                    </div>
+
+                    {/* Set Expiration Date */}
+                    <div className="expiration-container">
+                        <input
+                            type="number"
+                            placeholder="Set expiration (days)"
+                            value={expirationDays}
+                            onChange={(e) => setExpirationDays(e.target.value)}
+                        />
+                        <button onClick={handleSetExpiration}>Set Expiration</button>
+                    </div>
                 </div>
             )}
         </div>
-    )
+    );
 }
