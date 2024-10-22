@@ -5,13 +5,17 @@ export const shortenUrl = async (req, res) => {
     const { originalUrl } = req.body;
 
     try {
-        const shortCode = nanoid(8);
+        let formattedUrl = originalUrl;
 
+        if (!/^https?:\/\//i.test(originalUrl)) {
+            formattedUrl = 'http://' + originalUrl;
+        }
+
+        const shortCode = nanoid(8);
         const shortUrl = `localhost:6061/${shortCode}`;
 
-        // Lưu thông tin vào database
         const url = new Url({
-            originalUrl,
+            originalUrl: formattedUrl,
             shortUrl,
             shortCode,
             createdAt: new Date(),
@@ -30,9 +34,12 @@ export const redirectUrl = async (req, res) => {
 
     try {
         const url = await Url.findOne({ shortCode });
-        console.log("URL", url.originalUrl)
 
         if (url) {
+            const currentDate = new Date();
+            if (url.expiresAt && url.expiresAt < currentDate) {
+                return res.status(410).json('URL has expired');
+            }
             return res.redirect(url.originalUrl);
         } else {
             return res.status(404).json('URL not found');
