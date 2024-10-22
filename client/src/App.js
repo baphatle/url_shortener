@@ -1,11 +1,20 @@
 import Form from "./components/Form";
-
+import VerifyPassowrd from "./components/VerifyPassowrd";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="Container">
-      <Form />
-    </div>
+    <>
+      <BrowserRouter>
+        <div className="Container">
+          <Routes>
+            <Route path="/verify" element={<VerifyPassowrd />} />
+            <Route path="/" element={<Form />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
+
+    </>
   );
 }
 

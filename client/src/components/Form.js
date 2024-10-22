@@ -23,8 +23,8 @@ export default function Form() {
             const response = await axios.put(`/edit/${shortUrl.split('/').pop()}`, {
                 newShortCode: customShortUrl
             });
-            setShortUrl(response.data.shortUrl);
-            setCustomShortUrl(''); // Clear the custom short URL input
+            setShortUrl(response?.data?.shortUrl);
+            setCustomShortUrl(''); 
         } catch (error) {
             console.error('Error updating short URL', error);
         }
@@ -35,8 +35,8 @@ export default function Form() {
             const response = await axios.put(`/expiration/${shortUrl.split('/').pop()}`, {
                 days: expirationDays
             });
-            console.log('Expiration updated', response.data);
-            setExpirationDays(''); // Clear the expiration days input
+            console.log('Expiration updated', response?.data);
+            setExpirationDays(''); 
         } catch (error) {
             console.error('Error setting expiration date', error);
         }
@@ -44,7 +44,7 @@ export default function Form() {
 
     const handleCopy = () => {
         navigator.clipboard.writeText(shortUrl).then(() => {
-            alert('Copied!'); // Show alert when copy is successful
+            alert('Copied!'); 
         }, (err) => {
             console.error('Failed to copy: ', err);
         });
@@ -58,7 +58,7 @@ export default function Form() {
                     type="text"
                     placeholder="Enter your original URL"
                     value={originalUrl}
-                    onChange={(e) => setOriginalUrl(e.target.value)}
+                    onChange={(e) => setOriginalUrl(e?.target?.value)}
                 />
                 <button onClick={handleShorten}>Shorten</button>
             </div>
@@ -69,7 +69,6 @@ export default function Form() {
                     <button onClick={handleCopy}>Copy</button>
                     {/* {copySuccess && <p>{copySuccess}</p>} */}
 
-                    {/* Custom Short URL */}
                     <div className="custom-container">
                         <input
                             type="text"
@@ -80,13 +79,12 @@ export default function Form() {
                         <button onClick={handleCustomShortUrl}>Update</button>
                     </div>
 
-                    {/* Set Expiration Date */}
                     <div className="expiration-container">
                         <input
                             type="number"
                             placeholder="Set expiration (days)"
                             value={expirationDays}
-                            onChange={(e) => setExpirationDays(e.target.value)}
+                            onChange={(e) => setExpirationDays(e?.target?.value)}
                         />
                         <button onClick={handleSetExpiration}>Set Expiration</button>
                     </div>

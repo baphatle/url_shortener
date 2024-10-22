@@ -1,0 +1,70 @@
+.verify-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: auto;
+}
+
+.verify-container h2 {
+    color: #333333;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+.verify-container input[type="password"] {
+    padding: 12px;
+    font-size: 1rem;
+    border: 2px solid #d1d5db;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    outline: none;
+    transition: border-color 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.verify-container input[type="password"]:focus {
+    border-color: #4f46e5;
+}
+
+.verify-container button {
+    padding: 12px;
+    font-size: 1rem;
+    color: #ffffff;
+    background-color: #4f46e5;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.verify-container button:hover {
+    background-color: #3b36c6;
+}
+
+
+@media (max-width: 768px) {
+    .verify-container {
+        padding: 20px;
+        width: 100%;
+    }
+
+    .verify-container h2 {
+        font-size: 1.5rem;
+    }
+
+    .verify-container input[type="password"] {
+        font-size: 0.9rem;
+    }
+
+    .verify-container button {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+}
