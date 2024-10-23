@@ -10,7 +10,7 @@ export default function VerifyPassword() {
 
     const handleVerify = async () => {
         try {
-            const response = await axios.post(`/verify/${shortCode}`, { password });
+            const response = await axios.post(`https://url-shortener-s4ws.onrender.com/verify/${shortCode}`, { password });
             const { originalUrl } = response.data;
             console.log("RES", response)
             window.location.href = originalUrl;
