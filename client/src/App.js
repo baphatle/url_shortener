@@ -8,7 +8,7 @@ function App() {
       <BrowserRouter>
         <div className="Container">
           <Routes>
-            <Route path="/verify" element={<VerifyPassowrd />} />
+            <Route path="/verify/:shortCode" element={<VerifyPassowrd />} />
             <Route path="/" element={<Form />} />
           </Routes>
         </div>
