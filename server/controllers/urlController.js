@@ -47,7 +47,7 @@ export const redirectUrl = async (req, res) => {
         }
 
         if (url?.password) {
-            return res.redirect(`https://ezurl.netlify.app/verify/${shortCode}`);
+            return res.redirect(`https://url-shortener-omega-one.vercel.app/verify/${shortCode}`);
         }
 
         return res.redirect(url.originalUrl);
