@@ -7,13 +7,13 @@ export default function Form() {
     const [shortUrl, setShortUrl] = useState('');
     const [customShortUrl, setCustomShortUrl] = useState('');
     const [expirationDays, setExpirationDays] = useState('');
-    const [password, setPassword] = useState('');  // Thêm state cho mật khẩu
+    const [password, setPassword] = useState('');  
 
     const handleShorten = async () => {
         try {
             const response = await axios.post('/shorten', {
                 originalUrl,
-                password: password || null // Truyền mật khẩu, nếu không có thì truyền null
+                password: password || null 
             });
             setShortUrl(response?.data?.shortUrl);
         } catch (error) {
@@ -63,7 +63,6 @@ export default function Form() {
                     value={originalUrl}
                     onChange={(e) => setOriginalUrl(e?.target?.value)}
                 />
-                {/* Ô input cho mật khẩu, tùy chọn */}
                 <input
                     type="password"
                     placeholder="Optional password (to protect short URL)"
@@ -83,7 +82,7 @@ export default function Form() {
                             type="text"
                             placeholder="Custom short URL"
                             value={customShortUrl}
-                            onChange={(e) => setCustomShortUrl(e.target.value)}
+                            onChange={(e) => setCustomShortUrl(e?.target?.value)}
                         />
                         <button onClick={handleCustomShortUrl}>Update</button>
                     </div>
