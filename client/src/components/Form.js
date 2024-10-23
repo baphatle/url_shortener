@@ -13,7 +13,7 @@ export default function Form() {
 
     const handleShorten = async () => {
         try {
-            const response = await axios.post('/shorten', {
+            const response = await axios.post('https://url-shortener-s4ws.onrender.com/shorten', {
                 originalUrl,
                 password: password || null
             });
@@ -25,7 +25,7 @@ export default function Form() {
 
     const handleCustomShortUrl = async () => {
         try {
-            const response = await axios.put(`/edit/${shortUrl.split('/').pop()}`, {
+            const response = await axios.put(`https://url-shortener-s4ws.onrender.com/edit/${shortUrl.split('/').pop()}`, {
                 newShortCode: customShortUrl
             });
             setShortUrl(response?.data?.shortUrl);
@@ -45,7 +45,7 @@ export default function Form() {
         }
 
         try {
-            const response = await axios.put(`/expiration/${shortUrl.split('/').pop()}`, {
+            const response = await axios.put(`https://url-shortener-s4ws.onrender.com/expiration/${shortUrl.split('/').pop()}`, {
                 days: parsedDays
             });
             console.log('Expiration updated', response?.data);
