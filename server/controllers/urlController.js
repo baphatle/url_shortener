@@ -95,13 +95,13 @@ export const verify = async (req, res) => {
     const { shortCode } = req.params;
     const { password } = req.body;
     try {
-        const url = await Url.findOne({ shortCode: shortCode });
+        const url = await Url.findOne({ shortCode });
 
-        if (password !== url?.password) {
+        if (!url || password !== url?.password) {
             return res.status(403).json('Incorrect password');
         }
-        // Nếu mật khẩu đúng, chuyển hướng đến originalUrl
-        return res.redirect(url.originalUrl)
+        // Trả về originalUrl thay vì chuyển hướng
+        return res.status(200).json({ originalUrl: url.originalUrl });
     } catch (error) {
         console.error(error);
         res.status(500).json('Server error');

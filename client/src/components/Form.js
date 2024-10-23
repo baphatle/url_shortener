@@ -7,11 +7,14 @@ export default function Form() {
     const [shortUrl, setShortUrl] = useState('');
     const [customShortUrl, setCustomShortUrl] = useState('');
     const [expirationDays, setExpirationDays] = useState('');
-    // const [copySuccess, setCopySuccess] = useState('');
+    const [password, setPassword] = useState('');  // Thêm state cho mật khẩu
 
     const handleShorten = async () => {
         try {
-            const response = await axios.post('/shorten', { originalUrl });
+            const response = await axios.post('/shorten', {
+                originalUrl,
+                password: password || null // Truyền mật khẩu, nếu không có thì truyền null
+            });
             setShortUrl(response?.data?.shortUrl);
         } catch (error) {
             console.error('Error shortening the URL', error);
@@ -24,7 +27,7 @@ export default function Form() {
                 newShortCode: customShortUrl
             });
             setShortUrl(response?.data?.shortUrl);
-            setCustomShortUrl(''); 
+            setCustomShortUrl('');
         } catch (error) {
             console.error('Error updating short URL', error);
         }
@@ -36,7 +39,7 @@ export default function Form() {
                 days: expirationDays
             });
             console.log('Expiration updated', response?.data);
-            setExpirationDays(''); 
+            setExpirationDays('');
         } catch (error) {
             console.error('Error setting expiration date', error);
         }
@@ -44,7 +47,7 @@ export default function Form() {
 
     const handleCopy = () => {
         navigator.clipboard.writeText(shortUrl).then(() => {
-            alert('Copied!'); 
+            alert('Copied!');
         }, (err) => {
             console.error('Failed to copy: ', err);
         });
@@ -60,6 +63,13 @@ export default function Form() {
                     value={originalUrl}
                     onChange={(e) => setOriginalUrl(e?.target?.value)}
                 />
+                {/* Ô input cho mật khẩu, tùy chọn */}
+                <input
+                    type="password"
+                    placeholder="Optional password (to protect short URL)"
+                    value={password}
+                    onChange={(e) => setPassword(e?.target?.value)}
+                />
                 <button onClick={handleShorten}>Shorten</button>
             </div>
 
@@ -67,7 +77,6 @@ export default function Form() {
                 <div className="result-container">
                     <input type="text" value={shortUrl} readOnly />
                     <button onClick={handleCopy}>Copy</button>
-                    {/* {copySuccess && <p>{copySuccess}</p>} */}
 
                     <div className="custom-container">
                         <input
