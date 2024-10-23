@@ -11,7 +11,7 @@ export const shortenUrl = async (req, res) => {
         }
 
         const shortCode = nanoid(6);
-        const shortUrl = `https://url-shortener-s4ws.onrender.com/${shortCode}`;
+        const shortUrl = `localhost:6061/${shortCode}`;
 
         const url = new Url({
             originalUrl: formattedUrl,
