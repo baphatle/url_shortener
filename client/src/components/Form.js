@@ -24,16 +24,25 @@ export default function Form() {
     };
 
     const handleCustomShortUrl = async () => {
+        console.log('Type of customShortUrl:', typeof customShortUrl);
+        if (!shortUrl || !customShortUrl) {
+            setErrorMessage('Short URL or custom short URL is empty');
+            return;
+        }
+
         try {
             const response = await axios.put(`https://url-shortener-s4ws.onrender.com/edit/${shortUrl.split('/').pop()}`, {
                 newShortCode: customShortUrl
             });
             setShortUrl(response?.data?.shortUrl);
             setCustomShortUrl('');
+            setErrorMessage('');
         } catch (error) {
             console.error('Error updating short URL', error);
+            setErrorMessage('Failed to update short URL');
         }
     };
+
 
     const handleSetExpiration = async () => {
         const parsedDays = parseInt(expirationDays, 10);
