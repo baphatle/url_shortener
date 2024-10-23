@@ -47,7 +47,7 @@ export const redirectUrl = async (req, res) => {
         }
 
         if (url?.password) {
-            return res.redirect(`http://localhost:3000/verify/${shortCode}`);
+            return res.redirect(`https://ezurl.netlify.app/verify/${shortCode}`);
         }
 
         return res.redirect(url.originalUrl);
@@ -77,7 +77,7 @@ export const editShortUrl = async (req, res) => {
         }
 
         url.shortCode = newShortCode;
-        url.shortUrl = `localhost:6061/${newShortCode}`;
+        url.shortUrl = `https://url-shortener-s4ws.onrender.com/${newShortCode}`;
 
         await url.save();
 
