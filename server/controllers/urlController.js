@@ -19,6 +19,7 @@ export const shortenUrl = async (req, res) => {
             shortCode,
             password: password || null,
             createdAt: new Date(),
+            expiresAt: null
         });
 
         await url.save();
@@ -54,7 +55,7 @@ export const redirectUrl = async (req, res) => {
         console.error(error);
         res.status(500).json('Server error');
     }
-}
+};
 
 
 
@@ -116,7 +117,7 @@ export const editExpiration = async (req, res) => {
         const url = await Url.findOne({ shortCode });
 
         if (!url) {
-            return res.status(404).json({ message: 'Không tìm thấy URL rút gọn' });
+            return res.status(404).json({ message: 'Short URL not found' });
         }
 
         const newExpiresAt = new Date();
@@ -127,12 +128,12 @@ export const editExpiration = async (req, res) => {
         await url.save();
 
         res.json({
-            message: 'Cập nhật thời gian hết hạn thành công',
+            message: 'Updated expiry day successfully',
             shortUrl: url.shortUrl,
             expiresAt: url.expiresAt,
         });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Lỗi máy chủ' });
+        res.status(500).json({ message: 'Server error' });
     }
 };

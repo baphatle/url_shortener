@@ -7,13 +7,15 @@ export default function Form() {
     const [shortUrl, setShortUrl] = useState('');
     const [customShortUrl, setCustomShortUrl] = useState('');
     const [expirationDays, setExpirationDays] = useState('');
-    const [password, setPassword] = useState('');  
+    const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
 
     const handleShorten = async () => {
         try {
             const response = await axios.post('/shorten', {
                 originalUrl,
-                password: password || null 
+                password: password || null
             });
             setShortUrl(response?.data?.shortUrl);
         } catch (error) {
@@ -34,14 +36,26 @@ export default function Form() {
     };
 
     const handleSetExpiration = async () => {
+        const parsedDays = parseInt(expirationDays, 10);
+
+        if (isNaN(parsedDays) || parsedDays <= 0) {
+            setErrorMessage('Please enter a positive number greater than 0');
+            setSuccessMessage('');
+            return;
+        }
+
         try {
             const response = await axios.put(`/expiration/${shortUrl.split('/').pop()}`, {
-                days: expirationDays
+                days: parsedDays
             });
             console.log('Expiration updated', response?.data);
             setExpirationDays('');
+            setErrorMessage('');
+            setSuccessMessage('Expiration date updated successfully!');
         } catch (error) {
             console.error('Error setting expiration date', error);
+            setErrorMessage('Failed to update expiration date');
+            setSuccessMessage('');
         }
     };
 
@@ -89,12 +103,16 @@ export default function Form() {
 
                     <div className="expiration-container">
                         <input
-                            type="number"
+                            type="text"
                             placeholder="Set expiration (days)"
                             value={expirationDays}
                             onChange={(e) => setExpirationDays(e?.target?.value)}
                         />
                         <button onClick={handleSetExpiration}>Set Expiration</button>
+
+                        {errorMessage && <p className="error-message">{errorMessage}</p>}
+
+                        {successMessage && <p className="success-message">{successMessage}</p>}
                     </div>
                 </div>
             )}
