@@ -6,7 +6,7 @@ const UrlSchema = new mongoose.Schema({
     shortCode: {
         type: String,
         required: true,
-        match: /^[a-zA-Z0-9]+$/
+        match: /^[a-zA-Z0-9!@#$%^&*()_+[\]{};':"\\|,.<>/?`~-]+$/
     },
     password: { type: String, default: null },
     createdAt: { type: Date, default: Date.now },
