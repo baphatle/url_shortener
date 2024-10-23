@@ -100,7 +100,6 @@ export const verify = async (req, res) => {
         if (!url || password !== url?.password) {
             return res.status(403).json('Incorrect password');
         }
-        // Trả về originalUrl thay vì chuyển hướng
         return res.status(200).json({ originalUrl: url.originalUrl });
     } catch (error) {
         console.error(error);
