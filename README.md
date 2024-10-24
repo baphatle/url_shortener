@@ -78,6 +78,7 @@ I chose **ReactJS**, **ExpressJS**, and **MongoDB** because they provide a moder
 
 
 ### **API Endpoints**
+If you want to test the live API, replace localhost:6061 with https://url-shortener-s4ws.onrender.com
 1. **Shorten URL**
    **Method**: POST
    **Endpoint**: localhost:6061/shorten
