@@ -82,6 +82,7 @@ If you want to test the live API, replace localhost:6061 with https://url-shorte
 1. **Shorten URL**
    **Method**: POST
    **Endpoint**: localhost:6061/shorten
+
    **Body**:
 
    { 
@@ -100,15 +101,16 @@ If you want to test the live API, replace localhost:6061 with https://url-shorte
 
    }
 
-1. **Redirect**
+2. **Redirect**
    **Method**: GET
    **Endpoint**: localhost:6061/:shortCode
 
    **Response**: Redirects to the original URL.
 
-1. **Verify Password**
+3. **Verify Password**
    **Method**: POST
    **Endpoint**: localhost:6061/verify/:shortCode
+
    **Body**:
 
    {
@@ -125,9 +127,10 @@ If you want to test the live API, replace localhost:6061 with https://url-shorte
 
    }
 
-1. **Custom Short URL**
+4. **Custom Short URL**
    **Method**: PUT
    **Endpoint**: localhost:6061/edit/:shortCode
+   
    **Body**:
 
    { 
@@ -149,9 +152,10 @@ If you want to test the live API, replace localhost:6061 with https://url-shorte
    }
 
 
-1. **Edit Expiry Day**
+5. **Edit Expiry Day**
    **Method**: PUT
    **Endpoint**: localhost:6061/expiration/:shortCode
+   
    **Body**:
 
    {
