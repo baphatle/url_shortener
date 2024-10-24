@@ -38,8 +38,12 @@ export default function Form() {
             setCustomShortUrl('');
             setErrorMessage('');
         } catch (error) {
-            console.error('Error updating short URL', error);
-            setErrorMessage('Failed to update short URL');
+            if (error?.response && error?.response?.data && error?.response?.data?.message) {
+                setErrorMessage(error?.response?.data?.message);
+            } else {
+                console.error('Error updating short URL', error);
+                setErrorMessage('Failed to update short URL');
+            }
         }
     };
 
