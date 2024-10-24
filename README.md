@@ -48,6 +48,7 @@ I chose **ReactJS**, **ExpressJS**, and **MongoDB** because they provide a moder
 - **jsonwebtoken**: For handling authentication.
 - **mongoose**: To interact with MongoDB.
 - **nanoid**: For generating unique short codes.
+
 **Client:**
 - **axios**: For making API requests.
 - **react**: The core library for building the UI.
