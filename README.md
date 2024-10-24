@@ -61,18 +61,19 @@ I chose **ReactJS**, **ExpressJS**, and **MongoDB** because they provide a moder
 ### **Usage Instructions**
 1. **Shorten a URL**:
    Enter a long URL into the input field to generate a shortened URL. Optionally, you can add a password for security.
+   
    <img width="631" alt="begining" src="https://github.com/user-attachments/assets/9b154241-414b-4d0f-a111-7b37d6d56047">
-2. **Customize Short URL**:
+3. **Customize Short URL**:
    Input a custom string to replace the automatically generated short URL.
    <img width="613" alt="how-to-custom" src="https://github.com/user-attachments/assets/50b45bd4-edd3-4768-a6cb-3999071142a7">
-3. **Copy Short URL**:
+4. **Copy Short URL**:
    Click the "Copy" button to copy the shortened URL to your clipboard.
    <img width="730" alt="Screen Shot 2024-10-23 at 20 18 20" src="https://github.com/user-attachments/assets/cf4f898b-bec9-40ae-a522-448508ed6378">
-4. **Set Expiry Date**:
+5. **Set Expiry Date**:
    Enter a positive integer to adjust the expiration date for the shortened URL.
    <img width="631" alt="number-only" src="https://github.com/user-attachments/assets/ee4b6c30-351b-4b4f-86d3-2d4c2f7c27e6">
    <img width="646" alt="set-expiry-successfully" src="https://github.com/user-attachments/assets/f5ffa794-2c54-48ff-afc1-78f0f9b287d9">
-5.	**Access Password-Protected URL**:
+6.	**Access Password-Protected URL**:
    If a password was set, enter the password to access the original URL from the shortened one
   <img width="653" alt="wrong-pass" src="https://github.com/user-attachments/assets/c4498761-33a2-4186-b788-9440fefb3e7f">
 
