@@ -10,8 +10,10 @@ export default function Form() {
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleShorten = async () => {
+        setIsLoading(true); // Bắt đầu trạng thái loading
         try {
             const response = await axios.post('https://url-shortener-s4ws.onrender.com/shorten', {
                 originalUrl,
@@ -20,6 +22,8 @@ export default function Form() {
             setShortUrl(response?.data?.shortUrl);
         } catch (error) {
             console.error('Error shortening the URL', error);
+        } finally {
+            setIsLoading(false); // Kết thúc trạng thái loading
         }
     };
 
@@ -96,7 +100,10 @@ export default function Form() {
                     value={password}
                     onChange={(e) => setPassword(e?.target?.value)}
                 />
-                <button onClick={handleShorten}>Shorten</button>
+                <button onClick={handleShorten} disabled={isLoading}>
+                    {isLoading ? 'Loading...' : 'Shorten'}
+                </button>
+
             </div>
 
             {shortUrl && (
