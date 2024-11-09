@@ -13,5 +13,8 @@ router.post('/register', registerUser);
 router.post('/login', loginUser);
 router.put('/edit/:shortCode', editShortUrl);
 router.put('/expiration/:shortCode', editExpiration)
+router.get('/', (req, res) => {
+    res.status(200).json({ message: "Server is up" });
+});
 
 export default router;
